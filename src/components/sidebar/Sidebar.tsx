@@ -51,7 +51,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed w-56 h-full no-scrollbar bg-white border border-[rgba(0, 0, 0, 0.30)] rounded-r-[45px] pt-[22px] pb-[41px] inset-y-0 left-0
+      className={`fixed w-56 h-full no-scrollbar bg-white border border-[rgba(0, 0, 0, 0.30)] rounded-r-[45px] pt-[59px] pb-[41px] inset-y-0 left-0
         transform transition duration-200 ease-in-out overflow-y-auto z-20
         md:translate-x-0 ${
           state.showSidebar ? "translate-x-0" : "-translate-x-full"
