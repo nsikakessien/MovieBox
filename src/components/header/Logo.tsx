@@ -1,4 +1,3 @@
-import React from "react";
 import Menu from "../../assets/svg/menu.svg";
 import { useAppState } from "../../context/AppContext";
 

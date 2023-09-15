@@ -1,4 +1,3 @@
-import React from "react";
 import moment from "moment";
 import MovieTrailer from "./components/MovieTrailer";
 import { useParams } from "react-router-dom";
