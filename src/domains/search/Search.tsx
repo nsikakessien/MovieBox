@@ -4,9 +4,9 @@ import useDebounce from "../../hooks/useDebounce";
 import Pagination from "../../components/pagination/Pagination";
 import { useSearchMovies } from "../../store/useMovies";
 import { MoviesList } from "../home/types";
-import { MovieResponseData } from "../../store";
 import Card from "../../components/card/Card";
 import PageLoader from "../../components/loader/Loader";
+import { MovieResponseData } from "../../store/types";
 
 const Search = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -54,30 +54,37 @@ const Search = () => {
           ref={inputRef}
           type="text"
           value={searchValue}
+          placeholder="Search For a Movie or TV Show"
           onChange={(e) => setSearchValue(e.target.value)}
           className="px-[6px] text-base py-[10px] border-[#666666] w-full border-2 rounded-md focus:outline-none"
         />
       </header>
 
-      {debounceSearch.length > 0 && (
-        <main className="px-[37px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full lg:grid-cols-4 gap-4">
-          {moviesList?.map((movie) => (
-            <Card
-              key={movie.id}
-              selectedId={selectedId}
-              setSelectedId={setSelectedId}
-              movie={movie}
-              isLiked={isLiked}
-              setIsLiked={setIsLiked}
-            />
-          ))}
+      {isLoading ? (
+        <PageLoader />
+      ) : (
+        <>
+          {debounceSearch.length > 0 && (
+            <main className="px-[37px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full lg:grid-cols-4 gap-4">
+              {moviesList?.map((movie) => (
+                <Card
+                  key={movie.id}
+                  selectedId={selectedId}
+                  setSelectedId={setSelectedId}
+                  movie={movie}
+                  isLiked={isLiked}
+                  setIsLiked={setIsLiked}
+                />
+              ))}
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </main>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </main>
+          )}
+        </>
       )}
     </>
   );

@@ -30,3 +30,7 @@ export const useGetMovieDetails = (id: number) => {
     }
   );
 };
+
+export const useDiscoverMovies = () => {
+  return useQuery("discoverMovies", tmdbService.getDiscoverMovies);
+};

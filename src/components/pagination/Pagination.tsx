@@ -11,25 +11,30 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-
   return (
-    <div>
+    <div className="flex">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
         Previous
       </button>
-      {pages.map((page) => (
-        <button
-          key={page}
-          onClick={() => onPageChange(page)}
-          className={currentPage === page ? "active" : ""}
-        >
-          {page}
+      <button
+        onClick={() => onPageChange(currentPage)}
+        className="bg-[#BE123C]"
+      >
+        {currentPage}
+      </button>
+      {currentPage + 1 <= totalPages && (
+        <button onClick={() => onPageChange(currentPage + 1)}>
+          {currentPage + 1}
         </button>
-      ))}
+      )}
+      {currentPage + 2 <= totalPages && (
+        <button onClick={() => onPageChange(currentPage + 2)}>
+          {currentPage + 2}
+        </button>
+      )}
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

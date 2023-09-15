@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     const moviesList = movies?.results.slice(0, 10);
     setMoviesToShow(moviesList);
-    setTopMovieId(moviesList[0].id);
+    setTopMovieId(moviesList?.[0]?.id);
   }, [movies]);
 
   if (isLoading || loadingDetails) {
