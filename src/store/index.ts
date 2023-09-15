@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MoviesList } from "../domains/home/types";
+import { MovieDetailsResponse, MovieResponse } from "./types";
 
 const BASE_URL = import.meta.env.VITE_REACT_APP_BASE_URL;
 const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -10,18 +10,6 @@ const axiosInstance = axios.create({
     api_key: import.meta.env.VITE_REACT_APP_API_KEY,
   },
 });
-
-export interface MovieResponseData {
-  page: number;
-  results: MoviesList[];
-  total_pages: number;
-  total_results: number;
-}
-
-export interface MovieResponse {
-  success: boolean;
-  data: MovieResponseData | unknown;
-}
 
 export const tmdbService = {
   getPopularMovies: async () => {
@@ -39,6 +27,28 @@ export const tmdbService = {
           api_key: API_KEY,
           query,
           page,
+        },
+      });
+
+      return {
+        success: true,
+        data: response.data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        data: error,
+      };
+    }
+  },
+
+  getMovieDetails: async (id: number): Promise<MovieDetailsResponse> => {
+    try {
+      const response = await axios.get(`${BASE_URL}/movie/${id}`, {
+        params: {
+          api_key: API_KEY,
+          movie_id: id,
+          append_to_response: "videos,credits,similar",
         },
       });
 

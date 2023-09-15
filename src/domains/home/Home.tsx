@@ -2,32 +2,37 @@ import { useState, useEffect } from "react";
 import Search from "../../assets/svg/search.svg";
 import Play from "../../assets/svg/play-red.svg";
 import CaretRight from "../../assets/svg/red-caret-tight.svg";
-import { usePopularMovies } from "../../store/useMovies";
+import { useGetMovieDetails, usePopularMovies } from "../../store/useMovies";
 import PageLoader from "../../components/loader/Loader";
 import { MoviesList } from "./types";
 import Card from "../../components/card/Card";
 import Logo from "../../components/header/Logo";
 import { useNavigate } from "react-router-dom";
+import { MovieDetailsData } from "../../store/types";
 
 const Home = () => {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
+  const [topMovieId, setTopMovieId] = useState(0);
   const [moviesToShow, setMoviesToShow] = useState<MoviesList[]>([]);
   const { data: movies, isLoading } = usePopularMovies();
+  const { data: movieDetail, isLoading: loadingDetails } =
+    useGetMovieDetails(topMovieId);
 
   useEffect(() => {
     const moviesList = movies?.results.slice(0, 10);
     setMoviesToShow(moviesList);
+    setTopMovieId(moviesList[0].id);
   }, [movies]);
 
-  if (isLoading) {
+  if (isLoading || loadingDetails) {
     return <PageLoader />;
   }
 
   return (
     <>
-      <header className="w-full p-[37px] ">
+      <header className="w-full p-[37px]">
         <div className="w-full h-[70vh] relative">
           <img
             src={`${import.meta.env.VITE_REACT_APP_IMAGE_URL}${
@@ -73,10 +78,20 @@ const Home = () => {
               <p className="max-w-[302px] font-medium text-sm text-white">
                 {moviesToShow?.[0]?.overview}
               </p>
-              <button className="px-4 py-[6px] bg-[#BE123C] flex items-center gap-2 w-max">
-                <img src={Play} alt="Play Icon" />
-                <p className="text-white text-sm font-bold">WATCH TRAILER</p>
-              </button>
+              <a
+                href={`https://www.youtube.com/watch?v=${
+                  (
+                    movieDetail?.data as MovieDetailsData
+                  )?.videos?.results?.find((film) => film.type === "Trailer")
+                    ?.key
+                }`}
+                target="_blank"
+              >
+                <button className="px-4 py-[6px] bg-[#BE123C] flex items-center gap-2 w-max">
+                  <img src={Play} alt="Play Icon" />
+                  <p className="text-white text-sm font-bold">WATCH TRAILER</p>
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -86,7 +101,7 @@ const Home = () => {
         <div className="grid grid-cols-2 mb-11">
           <div className="w-full">
             <p className="text-black font-bold md:text-[36px] text-[18px]">
-              Featured Movie
+              Featured Movies
             </p>
           </div>
           <div className="w-full flex justify-end items-center gap-2">
