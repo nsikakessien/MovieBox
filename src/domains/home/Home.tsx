@@ -9,6 +9,7 @@ import Card from "../../components/card/Card";
 import Logo from "../../components/header/Logo";
 import { useNavigate } from "react-router-dom";
 import { MovieDetailsData } from "../../store/types";
+import ComingSoon from "../ComingSoon/ComingSoon";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Home = () => {
   const [selectedId, setSelectedId] = useState(0);
   const [topMovieId, setTopMovieId] = useState(0);
   const [moviesToShow, setMoviesToShow] = useState<MoviesList[]>([]);
-  const { data: movies, isLoading } = usePopularMovies();
+  const { data: movies, isLoading, isError: errorList } = usePopularMovies();
   const { data: movieDetail, isLoading: loadingDetails } =
     useGetMovieDetails(topMovieId);
 
@@ -28,6 +29,15 @@ const Home = () => {
 
   if (isLoading || loadingDetails) {
     return <PageLoader />;
+  }
+
+  if (errorList) {
+    return (
+      <ComingSoon
+        message="please try again"
+        title="OOPS, Something went wrong. Please try again"
+      />
+    );
   }
 
   return (

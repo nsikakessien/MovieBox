@@ -48,15 +48,13 @@ const MovieDetails = () => {
 
       <main className="px-[55px] pb-12">
         <div className="flex lg:justify-between lg:gap-0 gap-4 flex-col lg:flex-row items-center mb-[25px]">
-          <p className="text-[#404040] text-[23px] font-medium flex gap-[17px] flex-col lg:flex-row">
+          <div className="text-[#404040] text-[23px] font-medium flex gap-[17px] flex-col lg:flex-row">
             <span className="flex items-center sm:flex-row flex-col gap-[17px]">
               <span data-testid="movie-title">{details.title}</span>
               <span className="flex items-center relative gap-3">
                 <span className="relative top-[-5px]">.</span>
                 <span data-testid="movie-release-date">
-                  {moment(new Date(details.release_date)).format(
-                    "ddd, MMMM Do YYYY"
-                  )}
+                  {new Date(details.release_date).toUTCString()}
                 </span>
               </span>
               <span className="flex items-center relative gap-3">
@@ -78,7 +76,7 @@ const MovieDetails = () => {
                 </span>
               ))}
             </span>
-          </p>
+          </div>
 
           <div className="flex items-center gap-[9px]">
             <img src={Star} alt="Star Icon" />

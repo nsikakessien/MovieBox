@@ -31,9 +31,8 @@ const Card = ({
   };
 
   return (
-    <Link to={`/movies/${movie.id}`}>
+    <Link to={`/movies/${movie.id}`} data-testid="movie-card">
       <div
-        data-testid="movie-card"
         className="flex flex-col gap-3 w-full"
         onClick={() => setSelectedId(movie.id)}
       >
