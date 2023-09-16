@@ -40,10 +40,6 @@ const Search = () => {
     setTotalPages(numberOfPages);
   }, [movies]);
 
-  if (isLoading) {
-    return <PageLoader />;
-  }
-
   return (
     <>
       <header className="w-full flex flex-col md:flex-row items-center px-[37px] py-[59px]">
