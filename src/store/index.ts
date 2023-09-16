@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 
 export const tmdbService = {
   getPopularMovies: async () => {
-    const response = await axiosInstance.get("/movie/popular");
+    const response = await axiosInstance.get("/movie/top_rated");
     return response.data;
   },
 
