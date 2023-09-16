@@ -8,6 +8,7 @@ import Star from "../../assets/svg/star.svg";
 import Showtime from "../../assets/svg/showtime.svg";
 import Watch1 from "../../assets/svg/watch-gray.svg";
 import Watch2 from "../../assets/svg/watch-white.svg";
+import Logo from "../../components/header/Logo";
 
 const MovieDetails = () => {
   const params = useParams();
@@ -36,6 +37,9 @@ const MovieDetails = () => {
   return (
     <>
       <header className="p-[37px] w-full">
+        <div className="flex justify-start w-full mb-4 md:hidden">
+          <Logo />
+        </div>
         <div className="border rounded-[20px] h-[70vh]">
           <MovieTrailer
             trailerKey={`${
@@ -71,7 +75,10 @@ const MovieDetails = () => {
 
             <span className="flex items-start gap-3">
               {details.genres.map((genre) => (
-                <span className="border border-[#F8E7EB] bg-white rounded-[15px] px-4 py-1 text-[#B91C1C] font-medium text-[15px]">
+                <span
+                  key={genre.id}
+                  className="border border-[#F8E7EB] bg-white rounded-[15px] px-4 py-1 text-[#B91C1C] font-medium text-[15px]"
+                >
                   {genre.name}
                 </span>
               ))}
