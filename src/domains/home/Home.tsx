@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import Search from "../../assets/svg/search.svg";
 import Play from "../../assets/svg/play-red.svg";
+import Facebook from "../../assets/svg/facebook.svg";
+import Instagram from "../../assets/svg/instagram.svg";
+import Twitter from "../../assets/svg/twitter.svg";
+import Youtube from "../../assets/svg/youtube.svg";
 import CaretRight from "../../assets/svg/red-caret-tight.svg";
 import { useGetMovieDetails, usePopularMovies } from "../../store/useMovies";
 import PageLoader from "../../components/loader/Loader";
@@ -107,7 +111,7 @@ const Home = () => {
         </div>
       </header>
 
-      <main className="flex flex-col px-[37px]">
+      <main className="flex flex-col px-[37px] mb-[147px]">
         <div className="grid grid-cols-2 mb-11">
           <div className="w-full">
             <p className="text-black font-bold md:text-[36px] text-[18px]">
@@ -133,6 +137,27 @@ const Home = () => {
           ))}
         </div>
       </main>
+
+      <footer className="w-full flex flex-col gap-9 items-center pb-[73px]">
+        <div className="flex gap-12">
+          <img src={Facebook} alt="Facebook Logo" />
+          <img src={Instagram} alt="Instagram Logo" />
+          <img src={Twitter} alt="Twitter Logo" />
+          <img src={Youtube} alt="Youtube Logo" />
+        </div>
+        <div className="flex gap-12 flex-col md:flex-row">
+          <p className="text-[#111827] text-[18px] font-bold">
+            Conditions of Use
+          </p>
+          <p className="text-[#111827] text-[18px] font-bold">
+            Privacy & Policy
+          </p>
+          <p className="text-[#111827] text-[18px] font-bold">Press Room</p>
+        </div>
+        <p className="text-[#6B7280] text-[18px] font-bold text-center">
+          © 2021 MovieBox by Adriana Eka Prayudha{" "}
+        </p>
+      </footer>
     </>
   );
 };

@@ -26,7 +26,7 @@ const MovieDetails = () => {
   const { data: movieDetail, isLoading: loadingDetails } = useGetMovieDetails(
     Number(params?.id)
   );
-  const { data: movies, isLoading } = useDiscoverMovies();
+  const { data: movies, isLoading } = useDiscoverMovies(1);
 
   const details = movieDetail?.data as MovieDetailsData;
 
@@ -127,7 +127,7 @@ const MovieDetails = () => {
                 <span className="text-[#BE123C]">
                   {details.credits?.cast
                     ?.map((actor) => actor.name)
-                    .slice(0, 3)
+                    ?.slice(0, 3)
                     .join(", ")}
                 </span>
               </p>

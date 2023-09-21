@@ -63,11 +63,32 @@ export const tmdbService = {
       };
     }
   },
-  getDiscoverMovies: async (): Promise<MovieResponse> => {
+  getDiscoverMovies: async (page: number): Promise<MovieResponse> => {
     try {
       const response = await axios.get(`${BASE_URL}/discover/movie`, {
         params: {
           api_key: API_KEY,
+          page,
+        },
+      });
+
+      return {
+        success: true,
+        data: response.data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        data: error,
+      };
+    }
+  },
+  getDiscoverTV: async (page: number): Promise<MovieResponse> => {
+    try {
+      const response = await axios.get(`${BASE_URL}/discover/tv`, {
+        params: {
+          api_key: API_KEY,
+          page,
         },
       });
 

@@ -6,6 +6,7 @@ import Home from "./domains/home/Home";
 import MovieDetails from "./domains/movie-details/MovieDetails";
 import Search from "./domains/search/Search";
 import ComingSoon from "./domains/ComingSoon/ComingSoon";
+import Movies from "./domains/movies/Movies";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/movies",
-        element: <ComingSoon />,
+        element: <Movies />,
       },
       {
         path: "/tv-series",

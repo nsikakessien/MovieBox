@@ -31,6 +31,12 @@ export const useGetMovieDetails = (id: number) => {
   );
 };
 
-export const useDiscoverMovies = () => {
-  return useQuery("discoverMovies", tmdbService.getDiscoverMovies);
+export const useDiscoverMovies = (page: number) => {
+  return useQuery(
+    ["discoverMovies", page],
+    (context: QueryFunctionContext<[string, number], MovieResponse>) => {
+      const [_, page] = context.queryKey;
+      return tmdbService.getDiscoverMovies(page);
+    }
+  );
 };
